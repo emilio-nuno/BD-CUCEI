@@ -8,9 +8,26 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import mysql.connector
 
+#Mete tu contra aquí
+password = ""
 
 class Ui_MainWindow(object):
+    def mostrarAlmacen(self, idAlmacen): #Validar si existe la tupla retornada
+        ctx = mysql.connector.connect(user = "root", password = password, host = "localhost", database = "bdcucei")
+        cursor = ctx.cursor()
+    
+        cursor.execute(f"select * from almacen where idAlmacen = {idAlmacen}")
+        tuplas = cursor.fetchall()
+        
+        self.txtCapacidad.setText(str(tuplas[0][1]))
+        self.txtNumLlenos.setText(str(tuplas[0][2]))
+        self.txtNumVacios.setText(str(tuplas[0][3]))
+        
+        cursor.close()
+        ctx.close()
+    
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -43,15 +60,15 @@ class Ui_MainWindow(object):
         self.label_4 = QtWidgets.QLabel(self.formLayoutWidget)
         self.label_4.setObjectName("label_4")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_4)
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lineEdit_2)
-        self.lineEdit_3 = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.lineEdit_3.setObjectName("lineEdit_3")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.lineEdit_3)
-        self.lineEdit_4 = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.lineEdit_4.setObjectName("lineEdit_4")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.lineEdit_4)
+        self.txtCapacidad = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.txtCapacidad.setObjectName("txtCapacidad")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.txtCapacidad)
+        self.txtNumLlenos = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.txtNumLlenos.setObjectName("txtNumLlenos")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.txtNumLlenos)
+        self.txtNumVacios = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.txtNumVacios.setObjectName("txtNumVacios")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.txtNumVacios)
         self.btnAgregar = QtWidgets.QPushButton(self.formLayoutWidget)
         self.btnAgregar.setObjectName("btnAgregar")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.btnAgregar)
@@ -64,9 +81,9 @@ class Ui_MainWindow(object):
         self.btnEliminar = QtWidgets.QPushButton(self.formLayoutWidget)
         self.btnEliminar.setObjectName("btnEliminar")
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.btnEliminar)
-        self.lineEdit = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.lineEdit.setObjectName("lineEdit")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.lineEdit)
+        self.txtIdAlmacen = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.txtIdAlmacen.setObjectName("txtIdAlmacen")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.txtIdAlmacen)
         self.pestanasBD.addTab(self.almacen, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -80,6 +97,9 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.pestanasBD.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        
+        ###AREA DE FUNCIONES
+        self.btnMostrar.clicked.connect(lambda: self.mostrarAlmacen(self.txtIdAlmacen.text()))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -93,7 +113,6 @@ class Ui_MainWindow(object):
         self.btnEditar.setText(_translate("MainWindow", "Editar"))
         self.btnEliminar.setText(_translate("MainWindow", "Eliminar"))
         self.pestanasBD.setTabText(self.pestanasBD.indexOf(self.almacen), _translate("MainWindow", "Almacén"))
-
 
 if __name__ == "__main__":
     import sys
