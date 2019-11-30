@@ -9,6 +9,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+def presionar():
+    print("has dado click")
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -22,6 +25,9 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(330, 280, 93, 28))
         self.pushButton.setObjectName("pushButton")
+        
+        self.pushButton.clicked.connect(presionar)
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
