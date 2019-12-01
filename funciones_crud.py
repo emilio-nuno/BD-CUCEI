@@ -17,3 +17,17 @@ class Almacen:
         
         cursor.close()
         
+    def agregarAlmacen(self):
+        cursor = self.ctx.cursor()
+        #Verificamos que la suma de llenos y vacíos no supere la capacidad
+        if((int(self.interfaz.txtNumLlenos.text()) + int(self.interfaz.txtNumVacios.text())) > int(self.interfaz.txtCapacidad.text())):
+            print("No se puede")
+        else:
+            valores = (self.interfaz.txtCapacidad.text(), self.interfaz.txtNumLlenos.text(), self.interfaz.txtNumVacios.text())
+            sql = "INSERT INTO almacen (capacidad, numLlenos, numVacios) VALUES (%s, %s, %s)"
+            cursor.execute(sql % valores)
+            self.ctx.commit()
+    
+    def __del__(self):
+        self.ctx.close() #Cerramos la conexión cuando se deje de usar el objeto
+        
