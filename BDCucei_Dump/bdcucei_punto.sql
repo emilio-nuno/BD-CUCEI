@@ -18,34 +18,29 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `edificio`
+-- Table structure for table `punto`
 --
 
-DROP TABLE IF EXISTS `edificio`;
+DROP TABLE IF EXISTS `punto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `edificio` (
+CREATE TABLE `punto` (
+  `idPunto` int(10) unsigned NOT NULL,
   `idEdificio` int(10) unsigned NOT NULL,
-  `numPisos` int(10) unsigned NOT NULL,
-  `latitud` decimal(10,8) NOT NULL COMMENT 'Va de -90 a 90',
-  `longitud` decimal(11,8) NOT NULL COMMENT 'Va de -180 a 180',
-  `idAlmacen` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`idEdificio`),
-  UNIQUE KEY `latitud_UNIQUE` (`latitud`),
-  UNIQUE KEY `longitud_UNIQUE` (`longitud`),
-  KEY `fk_edificio_almacen_idx` (`idAlmacen`),
-  CONSTRAINT `fk_edificio_almacen` FOREIGN KEY (`idAlmacen`) REFERENCES `almacen` (`idAlmacen`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un edificio';
+  PRIMARY KEY (`idPunto`),
+  KEY `fk_punto_edificio_idx` (`idEdificio`),
+  CONSTRAINT `fk_punto_edificio` FOREIGN KEY (`idEdificio`) REFERENCES `edificio` (`idEdificio`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un punto de servicio';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `edificio`
+-- Dumping data for table `punto`
 --
 
-LOCK TABLES `edificio` WRITE;
-/*!40000 ALTER TABLE `edificio` DISABLE KEYS */;
-INSERT INTO `edificio` VALUES (1,3,20.65969800,-103.34960900,1),(2,3,20.65830100,-103.35284200,1),(3,4,20.65821300,-103.35177400,2),(4,2,20.65858900,-103.35155800,3),(5,2,20.65796600,-103.35146100,4),(6,4,20.65777500,-103.35111300,5),(7,4,20.65760000,-103.35151500,6),(8,1,20.65709300,-103.35097300,7),(9,2,20.65695700,-103.35067800,8),(10,2,20.65680700,-103.35024900,9),(11,2,20.65741400,-103.35234600,9);
-/*!40000 ALTER TABLE `edificio` ENABLE KEYS */;
+LOCK TABLES `punto` WRITE;
+/*!40000 ALTER TABLE `punto` DISABLE KEYS */;
+INSERT INTO `punto` VALUES (1,1),(2,1),(3,2),(4,3),(5,4),(6,4),(7,5),(8,6),(9,6),(10,7),(11,9);
+/*!40000 ALTER TABLE `punto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
