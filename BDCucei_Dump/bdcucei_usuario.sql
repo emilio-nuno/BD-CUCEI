@@ -18,28 +18,29 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `equipo`
+-- Table structure for table `usuario`
 --
 
-DROP TABLE IF EXISTS `equipo`;
+DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `equipo` (
-  `numSerie` decimal(5,0) unsigned NOT NULL,
-  `costoAdquisicion` decimal(10,2) unsigned NOT NULL,
-  `estado` enum('ACTIVO','INACTIVO','AGOTADO') DEFAULT 'ACTIVO',
-  PRIMARY KEY (`numSerie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un equipo para un punto de servicio';
+CREATE TABLE `usuario` (
+  `idUsuario` int(10) unsigned NOT NULL,
+  `fechaRegistro` date NOT NULL,
+  `contraseña` varchar(45) NOT NULL,
+  `tipo` enum('NORMAL','ESPECIALIZADO') DEFAULT 'NORMAL',
+  PRIMARY KEY (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelo de un Usuario';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `equipo`
+-- Dumping data for table `usuario`
 --
 
-LOCK TABLES `equipo` WRITE;
-/*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (74457,24.23,'AGOTADO'),(74829,653.21,'ACTIVO'),(76762,123.69,'INACTIVO'),(77837,203.23,'AGOTADO'),(93984,120.23,'ACTIVO'),(95843,403.22,'ACTIVO'),(97238,223.23,'INACTIVO'),(97472,100.23,'ACTIVO'),(98598,623.69,'ACTIVO'),(99839,13.23,'ACTIVO');
-/*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'2019-12-01','password','NORMAL'),(2,'2019-11-01','contraseña','NORMAL'),(3,'2019-11-15','maquinadefuego','NORMAL'),(4,'2019-11-21','golosinas','NORMAL'),(5,'2019-11-30','machin22','NORMAL'),(6,'2019-11-07','plaquetas17','NORMAL'),(7,'2019-10-07','johnmisty1','NORMAL'),(8,'2019-10-22','fatheri','ESPECIALIZADO'),(9,'2019-10-24','preferSpeak','ESPECIALIZADO'),(10,'2019-09-13','MISTERCOOL','ESPECIALIZADO');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-01 14:18:55
+-- Dump completed on 2019-12-01 14:18:56
