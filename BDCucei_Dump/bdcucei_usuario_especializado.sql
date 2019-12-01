@@ -27,9 +27,12 @@ DROP TABLE IF EXISTS `usuario_especializado`;
 CREATE TABLE `usuario_especializado` (
   `idUsuario` int(10) unsigned NOT NULL,
   `fechaNacimiento` date NOT NULL,
+  `idAlmacen` int(10) unsigned NOT NULL,
   PRIMARY KEY (`idUsuario`),
+  KEY `fk_especializado_almacen_idx` (`idAlmacen`),
+  CONSTRAINT `fk_especializado_almacen` FOREIGN KEY (`idAlmacen`) REFERENCES `almacen` (`idAlmacen`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_especializado_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un Usuario administrativo';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un Usuario Especializado';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +41,7 @@ CREATE TABLE `usuario_especializado` (
 
 LOCK TABLES `usuario_especializado` WRITE;
 /*!40000 ALTER TABLE `usuario_especializado` DISABLE KEYS */;
-INSERT INTO `usuario_especializado` VALUES (8,'1999-03-26'),(9,'1999-03-25'),(10,'1999-03-12');
+INSERT INTO `usuario_especializado` VALUES (8,'1999-03-26',1),(9,'1999-03-25',1),(10,'1999-03-12',2);
 /*!40000 ALTER TABLE `usuario_especializado` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-01 14:39:16
+-- Dump completed on 2019-12-01 15:00:50
