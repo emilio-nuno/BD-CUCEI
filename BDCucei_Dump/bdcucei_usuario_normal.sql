@@ -18,29 +18,27 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `punto`
+-- Table structure for table `usuario_normal`
 --
 
-DROP TABLE IF EXISTS `punto`;
+DROP TABLE IF EXISTS `usuario_normal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `punto` (
-  `idPunto` int(10) unsigned NOT NULL,
-  `idEdificio` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idPunto`),
-  KEY `fk_punto_edificio_idx` (`idEdificio`),
-  CONSTRAINT `fk_punto_edificio` FOREIGN KEY (`idEdificio`) REFERENCES `edificio` (`idEdificio`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un punto de servicio';
+CREATE TABLE `usuario_normal` (
+  `idUsuario` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`idUsuario`),
+  CONSTRAINT `fk_normal_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un Usuario Normal';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `punto`
+-- Dumping data for table `usuario_normal`
 --
 
-LOCK TABLES `punto` WRITE;
-/*!40000 ALTER TABLE `punto` DISABLE KEYS */;
-INSERT INTO `punto` VALUES (1,1),(2,1),(3,2),(4,3),(5,4),(6,4),(7,5),(8,6),(9,6),(10,7),(11,9);
-/*!40000 ALTER TABLE `punto` ENABLE KEYS */;
+LOCK TABLES `usuario_normal` WRITE;
+/*!40000 ALTER TABLE `usuario_normal` DISABLE KEYS */;
+INSERT INTO `usuario_normal` VALUES (1),(2),(3),(4),(5),(6),(7);
+/*!40000 ALTER TABLE `usuario_normal` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-01 14:39:17
+-- Dump completed on 2019-12-01 14:39:15
