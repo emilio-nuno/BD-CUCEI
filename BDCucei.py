@@ -8,26 +8,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import mysql.connector
+from funciones_crud import Almacen
 
 #Mete tu contra aquí
 password = ""
 
 class Ui_MainWindow(object):
-    def mostrarAlmacen(self, idAlmacen): #Validar si existe la tupla retornada
-        ctx = mysql.connector.connect(user = "root", password = password, host = "localhost", database = "bdcucei")
-        cursor = ctx.cursor()
-    
-        cursor.execute(f"select * from almacen where idAlmacen = {idAlmacen}")
-        tuplas = cursor.fetchall()
-        
-        self.txtCapacidad.setText(str(tuplas[0][1]))
-        self.txtNumLlenos.setText(str(tuplas[0][2]))
-        self.txtNumVacios.setText(str(tuplas[0][3]))
-        
-        cursor.close()
-        ctx.close()
-    
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -99,7 +85,8 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         
         ###AREA DE FUNCIONES
-        self.btnMostrar.clicked.connect(lambda: self.mostrarAlmacen(self.txtIdAlmacen.text()))
+        almacen = Almacen(self, password)
+        self.btnMostrar.clicked.connect(lambda: almacen.mostrarAlmacen(self.txtIdAlmacen.text()))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
