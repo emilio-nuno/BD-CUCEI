@@ -18,29 +18,34 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `almacen`
+-- Table structure for table `edificio`
 --
 
-DROP TABLE IF EXISTS `almacen`;
+DROP TABLE IF EXISTS `edificio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `almacen` (
-  `idAlmacen` int(10) unsigned NOT NULL,
-  `capacidad` int(10) unsigned NOT NULL,
-  `numLlenos` int(10) unsigned NOT NULL,
-  `numVacios` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idAlmacen`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un almacén';
+CREATE TABLE `edificio` (
+  `idEdificio` int(10) unsigned NOT NULL,
+  `numPisos` int(10) unsigned NOT NULL,
+  `latitud` decimal(10,8) NOT NULL COMMENT 'Va de -90 a 90',
+  `longitud` decimal(11,8) NOT NULL COMMENT 'Va de -180 a 180',
+  `idAlmacen` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`idEdificio`),
+  UNIQUE KEY `latitud_UNIQUE` (`latitud`),
+  UNIQUE KEY `longitud_UNIQUE` (`longitud`),
+  KEY `fk_edificio_almacen_idx` (`idAlmacen`),
+  CONSTRAINT `fk_edificio_almacen` FOREIGN KEY (`idAlmacen`) REFERENCES `almacen` (`idAlmacen`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un edificio';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `almacen`
+-- Dumping data for table `edificio`
 --
 
-LOCK TABLES `almacen` WRITE;
-/*!40000 ALTER TABLE `almacen` DISABLE KEYS */;
-INSERT INTO `almacen` VALUES (1,100,40,60),(2,100,75,25),(3,100,25,75),(4,100,35,65),(5,100,65,35),(6,100,15,85),(7,100,40,60),(8,100,95,5),(9,100,45,55),(10,100,55,45);
-/*!40000 ALTER TABLE `almacen` ENABLE KEYS */;
+LOCK TABLES `edificio` WRITE;
+/*!40000 ALTER TABLE `edificio` DISABLE KEYS */;
+INSERT INTO `edificio` VALUES (1,3,20.65969800,-103.34960900,1),(2,3,20.65830100,-103.35284200,1),(3,4,20.65821300,-103.35177400,2),(4,2,20.65858900,-103.35155800,3),(5,2,20.65796600,-103.35146100,4),(6,4,20.65777500,-103.35111300,5),(7,4,20.65760000,-103.35151500,6),(8,1,20.65709300,-103.35097300,7),(9,2,20.65695700,-103.35067800,8),(10,2,20.65680700,-103.35024900,9),(11,2,20.65741400,-103.35234600,9);
+/*!40000 ALTER TABLE `edificio` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-01 13:12:37
+-- Dump completed on 2019-12-01 13:12:36
