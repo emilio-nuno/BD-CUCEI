@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from funciones_crud import Almacen
 
 #Mete tu contra aquí
-password = "Deutsche_96*"
+password = ""
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -86,9 +86,10 @@ class Ui_MainWindow(object):
         
         ###AREA DE FUNCIONES
         almacen = Almacen(self, password)
-        self.btnMostrar.clicked.connect(lambda: almacen.mostrarAlmacen(self.txtIdAlmacen.text()))
+        self.btnMostrar.clicked.connect(lambda:almacen.mostrarAlmacen())
         self.btnAgregar.clicked.connect(almacen.agregarAlmacen)
-
+        self.btnEditar.clicked.connect(almacen.editarAlmacen)
+        
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
