@@ -24,10 +24,11 @@ class Almacen:
         if((int(self.interfaz.txtNumLlenos.text()) + int(self.interfaz.txtNumVacios.text())) > int(self.interfaz.txtCapacidad.text())):
             print("El número de garrafones llenos y vacíos en el almacén no pueden superar la capacidad dada")
         else:
-            valores = (self.interfaz.txtCapacidad.text(), self.interfaz.txtNumLlenos.text(), self.interfaz.txtNumVacios.text())
-            sql = "INSERT INTO almacen (capacidad, numLlenos, numVacios) VALUES (%s, %s, %s)"
+            valores = (self.interfaz.txtIdAlmacen.text(), self.interfaz.txtCapacidad.text(), self.interfaz.txtNumLlenos.text(), self.interfaz.txtNumVacios.text())
+            sql = "INSERT INTO almacen (idAlmacen, capacidad, numLlenos, numVacios) VALUES (%s, %s, %s, %s)"
             cursor.execute(sql % valores)
             self.ctx.commit()
+            
         cursor.close()
     
     def editarAlmacen(self):
@@ -56,6 +57,13 @@ class Almacen:
         
         cursor.close()
     
+    def eliminarAlmacen(self):
+        #Aquí eliminamos registros y verificamos que el orden en la enumeración se mantenga
+        cursor = self.ctx.cursor()
+        idAlmacen = self.interfaz.txtIdAlmacen.text()
+        cursor.execute(f"DELETE FROM almacen WHERE idAlmacen = {idAlmacen}")
+        self.ctx.commit()
+        cursor.close()
     
     def __del__(self):
         self.ctx.close() #Cerramos la conexión cuando se deje de usar el objeto

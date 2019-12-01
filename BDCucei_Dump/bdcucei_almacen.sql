@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `almacen`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `almacen` (
-  `idAlmacen` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idAlmacen` int(10) unsigned NOT NULL,
   `capacidad` int(10) unsigned NOT NULL,
   `numLlenos` int(10) unsigned NOT NULL,
   `numVacios` int(10) unsigned NOT NULL,
   PRIMARY KEY (`idAlmacen`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un almacén';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un almacén';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `almacen` (
 
 LOCK TABLES `almacen` WRITE;
 /*!40000 ALTER TABLE `almacen` DISABLE KEYS */;
-INSERT INTO `almacen` VALUES (1,100,50,50),(2,100,75,25),(3,100,25,75),(4,100,35,65),(5,100,65,35),(6,100,15,85);
+INSERT INTO `almacen` VALUES (1,100,40,60),(2,100,75,25),(3,100,25,75),(4,100,35,65),(5,100,65,35),(6,100,15,85),(7,100,40,60),(8,100,95,5),(9,100,45,55),(10,100,55,45);
 /*!40000 ALTER TABLE `almacen` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-30 13:50:59
+-- Dump completed on 2019-11-30 23:21:07

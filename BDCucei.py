@@ -89,6 +89,7 @@ class Ui_MainWindow(object):
         self.btnMostrar.clicked.connect(lambda:almacen.mostrarAlmacen())
         self.btnAgregar.clicked.connect(almacen.agregarAlmacen)
         self.btnEditar.clicked.connect(almacen.editarAlmacen)
+        self.btnEliminar.clicked.connect(almacen.eliminarAlmacen)
         
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
