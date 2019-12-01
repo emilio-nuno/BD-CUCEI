@@ -18,29 +18,28 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `almacen`
+-- Table structure for table `equipo`
 --
 
-DROP TABLE IF EXISTS `almacen`;
+DROP TABLE IF EXISTS `equipo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `almacen` (
-  `idAlmacen` int(10) unsigned NOT NULL,
-  `capacidad` int(10) unsigned NOT NULL,
-  `numLlenos` int(10) unsigned NOT NULL,
-  `numVacios` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idAlmacen`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un almacén';
+CREATE TABLE `equipo` (
+  `numSerie` decimal(5,0) unsigned NOT NULL,
+  `costoAdquisicion` decimal(10,2) unsigned NOT NULL,
+  `estado` enum('ACTIVO','INACTIVO','AGOTADO') DEFAULT 'ACTIVO',
+  PRIMARY KEY (`numSerie`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un equipo para un punto de servicio';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `almacen`
+-- Dumping data for table `equipo`
 --
 
-LOCK TABLES `almacen` WRITE;
-/*!40000 ALTER TABLE `almacen` DISABLE KEYS */;
-INSERT INTO `almacen` VALUES (1,100,40,60),(2,100,75,25),(3,100,25,75),(4,100,35,65),(5,100,65,35),(6,100,15,85),(7,100,40,60),(8,100,95,5),(9,100,45,55),(10,100,55,45);
-/*!40000 ALTER TABLE `almacen` ENABLE KEYS */;
+LOCK TABLES `equipo` WRITE;
+/*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
+INSERT INTO `equipo` VALUES (74457,24.23,'AGOTADO'),(74829,653.21,'ACTIVO'),(76762,123.69,'INACTIVO'),(77837,203.23,'AGOTADO'),(93984,120.23,'ACTIVO'),(95843,403.22,'ACTIVO'),(97238,223.23,'INACTIVO'),(97472,100.23,'ACTIVO'),(98598,623.69,'ACTIVO'),(99839,13.23,'ACTIVO');
+/*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
