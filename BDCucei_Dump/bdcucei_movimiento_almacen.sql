@@ -18,28 +18,32 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `equipo`
+-- Table structure for table `movimiento_almacen`
 --
 
-DROP TABLE IF EXISTS `equipo`;
+DROP TABLE IF EXISTS `movimiento_almacen`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `equipo` (
-  `numSerie` decimal(5,0) unsigned NOT NULL,
-  `costoAdquisicion` decimal(10,2) unsigned NOT NULL,
-  `estado` enum('ACTIVO','INACTIVO','AGOTADO') DEFAULT 'ACTIVO',
-  PRIMARY KEY (`numSerie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un equipo para un punto de servicio';
+CREATE TABLE `movimiento_almacen` (
+  `idMovimiento` int(10) unsigned NOT NULL,
+  `idAlmacen` int(10) unsigned NOT NULL,
+  `numGarrafones` int(10) unsigned NOT NULL,
+  `tipoMovimiento` enum('INGRESO','EGRESO') NOT NULL,
+  `fecha` date NOT NULL,
+  PRIMARY KEY (`idMovimiento`),
+  KEY `fk_movimiento_almacen_idx` (`idAlmacen`),
+  CONSTRAINT `fk_movimiento_almacen` FOREIGN KEY (`idAlmacen`) REFERENCES `almacen` (`idAlmacen`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modela un movimiento para suplir un Almacén';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `equipo`
+-- Dumping data for table `movimiento_almacen`
 --
 
-LOCK TABLES `equipo` WRITE;
-/*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (74457,24.23,'AGOTADO'),(74829,653.21,'ACTIVO'),(76762,123.69,'INACTIVO'),(77837,203.23,'AGOTADO'),(93984,120.23,'ACTIVO'),(95843,403.22,'ACTIVO'),(97238,223.23,'INACTIVO'),(97472,100.23,'ACTIVO'),(98598,623.69,'ACTIVO'),(99839,13.23,'ACTIVO');
-/*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
+LOCK TABLES `movimiento_almacen` WRITE;
+/*!40000 ALTER TABLE `movimiento_almacen` DISABLE KEYS */;
+INSERT INTO `movimiento_almacen` VALUES (1,1,30,'EGRESO','2019-09-28'),(2,1,10,'INGRESO','2019-12-28'),(3,3,5,'EGRESO','2019-11-10'),(4,4,5,'INGRESO','2018-11-10'),(5,6,5,'EGRESO','2019-05-10'),(6,7,54,'INGRESO','2019-03-10'),(7,3,23,'EGRESO','2019-02-24'),(8,4,53,'INGRESO','2019-06-24'),(9,7,43,'INGRESO','2019-09-17'),(10,3,65,'EGRESO','2019-06-16');
+/*!40000 ALTER TABLE `movimiento_almacen` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 15:35:00
+-- Dump completed on 2019-12-02 15:34:58

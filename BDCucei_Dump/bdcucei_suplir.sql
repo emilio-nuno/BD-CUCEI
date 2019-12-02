@@ -18,28 +18,33 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `equipo`
+-- Table structure for table `suplir`
 --
 
-DROP TABLE IF EXISTS `equipo`;
+DROP TABLE IF EXISTS `suplir`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `equipo` (
-  `numSerie` decimal(5,0) unsigned NOT NULL,
-  `costoAdquisicion` decimal(10,2) unsigned NOT NULL,
-  `estado` enum('ACTIVO','INACTIVO','AGOTADO') DEFAULT 'ACTIVO',
-  PRIMARY KEY (`numSerie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un equipo para un punto de servicio';
+CREATE TABLE `suplir` (
+  `idReporte` int(10) unsigned NOT NULL,
+  `idPunto` int(10) unsigned NOT NULL,
+  `idMovimiento` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`idReporte`),
+  UNIQUE KEY `idMovimiento_UNIQUE` (`idMovimiento`),
+  KEY `fk_suplir_punto_idx` (`idPunto`),
+  CONSTRAINT `fk_suplir_movimiento` FOREIGN KEY (`idMovimiento`) REFERENCES `movimiento_almacen` (`idMovimiento`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `fk_suplir_punto` FOREIGN KEY (`idPunto`) REFERENCES `punto` (`idPunto`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_suplir_reporte` FOREIGN KEY (`idReporte`) REFERENCES `reporte` (`idReporte`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modela la relación ternaria entre Punto, Movimiento_Almacen y Reporte';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `equipo`
+-- Dumping data for table `suplir`
 --
 
-LOCK TABLES `equipo` WRITE;
-/*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (74457,24.23,'AGOTADO'),(74829,653.21,'ACTIVO'),(76762,123.69,'INACTIVO'),(77837,203.23,'AGOTADO'),(93984,120.23,'ACTIVO'),(95843,403.22,'ACTIVO'),(97238,223.23,'INACTIVO'),(97472,100.23,'ACTIVO'),(98598,623.69,'ACTIVO'),(99839,13.23,'ACTIVO');
-/*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
+LOCK TABLES `suplir` WRITE;
+/*!40000 ALTER TABLE `suplir` DISABLE KEYS */;
+INSERT INTO `suplir` VALUES (1,1,1),(2,2,2),(3,3,3),(4,6,4);
+/*!40000 ALTER TABLE `suplir` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
