@@ -18,27 +18,30 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuario_normal`
+-- Table structure for table `dispone_de`
 --
 
-DROP TABLE IF EXISTS `usuario_normal`;
+DROP TABLE IF EXISTS `dispone_de`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `usuario_normal` (
-  `idUsuario` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idUsuario`),
-  CONSTRAINT `fk_normal_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un Usuario Normal';
+CREATE TABLE `dispone_de` (
+  `idPunto` int(10) unsigned NOT NULL,
+  `numSerie` decimal(5,0) unsigned NOT NULL,
+  UNIQUE KEY `numSerie_UNIQUE` (`numSerie`),
+  KEY `fk_dispone_de_punto_idx` (`idPunto`),
+  CONSTRAINT `fk_dispone_de_equipo` FOREIGN KEY (`numSerie`) REFERENCES `equipo` (`numSerie`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_dispone_de_punto` FOREIGN KEY (`idPunto`) REFERENCES `punto` (`idPunto`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de la relación entre Punto y Equipo';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuario_normal`
+-- Dumping data for table `dispone_de`
 --
 
-LOCK TABLES `usuario_normal` WRITE;
-/*!40000 ALTER TABLE `usuario_normal` DISABLE KEYS */;
-INSERT INTO `usuario_normal` VALUES (1),(2),(3),(4),(5),(6),(7);
-/*!40000 ALTER TABLE `usuario_normal` ENABLE KEYS */;
+LOCK TABLES `dispone_de` WRITE;
+/*!40000 ALTER TABLE `dispone_de` DISABLE KEYS */;
+INSERT INTO `dispone_de` VALUES (1,74457),(1,74829),(2,76762),(3,77837),(4,93984),(5,95843),(6,97238),(7,97472),(8,98598),(8,99839);
+/*!40000 ALTER TABLE `dispone_de` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02  9:18:13
+-- Dump completed on 2019-12-02  9:18:15

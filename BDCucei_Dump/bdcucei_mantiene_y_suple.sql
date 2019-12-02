@@ -18,27 +18,30 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuario_normal`
+-- Table structure for table `mantiene_y_suple`
 --
 
-DROP TABLE IF EXISTS `usuario_normal`;
+DROP TABLE IF EXISTS `mantiene_y_suple`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `usuario_normal` (
+CREATE TABLE `mantiene_y_suple` (
   `idUsuario` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idUsuario`),
-  CONSTRAINT `fk_normal_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un Usuario Normal';
+  `numSerie` decimal(5,0) unsigned NOT NULL,
+  PRIMARY KEY (`idUsuario`,`numSerie`),
+  KEY `fk_mantiene_y_suple_equipo_idx` (`numSerie`),
+  CONSTRAINT `fk_mantiene_y_suple_equipo` FOREIGN KEY (`numSerie`) REFERENCES `equipo` (`numSerie`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_mantiene_y_suple_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario_especializado` (`idUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de relación de mantenimiento entre Equipo y Usuario Administrativo';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuario_normal`
+-- Dumping data for table `mantiene_y_suple`
 --
 
-LOCK TABLES `usuario_normal` WRITE;
-/*!40000 ALTER TABLE `usuario_normal` DISABLE KEYS */;
-INSERT INTO `usuario_normal` VALUES (1),(2),(3),(4),(5),(6),(7);
-/*!40000 ALTER TABLE `usuario_normal` ENABLE KEYS */;
+LOCK TABLES `mantiene_y_suple` WRITE;
+/*!40000 ALTER TABLE `mantiene_y_suple` DISABLE KEYS */;
+INSERT INTO `mantiene_y_suple` VALUES (8,74457),(9,74457),(10,74457),(8,74829),(9,74829),(10,74829),(8,76762),(9,76762),(10,76762),(8,77837),(9,77837),(10,77837),(8,93984),(9,93984),(10,93984),(8,95843),(9,95843),(10,95843),(8,97238),(9,97238),(10,97238),(8,97472),(9,97472),(10,97472),(8,98598),(9,98598),(10,98598),(8,99839),(9,99839),(10,99839);
+/*!40000 ALTER TABLE `mantiene_y_suple` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02  9:18:13
+-- Dump completed on 2019-12-02  9:18:15

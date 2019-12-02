@@ -18,27 +18,35 @@ USE `bdcucei`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuario_normal`
+-- Table structure for table `reporte`
 --
 
-DROP TABLE IF EXISTS `usuario_normal`;
+DROP TABLE IF EXISTS `reporte`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `usuario_normal` (
+CREATE TABLE `reporte` (
+  `idReporte` int(10) unsigned NOT NULL,
+  `fechaReporte` date NOT NULL,
+  `estado` enum('INACTIVO','AGOTADO') NOT NULL,
+  `comentario` varchar(45) DEFAULT NULL COMMENT 'Este es opcional',
   `idUsuario` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idUsuario`),
-  CONSTRAINT `fk_normal_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modelado de un Usuario Normal';
+  `numSerie` decimal(5,0) unsigned NOT NULL,
+  PRIMARY KEY (`idReporte`),
+  KEY `fk_reporte_usuario_idx` (`idUsuario`),
+  KEY `fk_reporte_equipo_idx` (`numSerie`),
+  CONSTRAINT `fk_reporte_equipo` FOREIGN KEY (`numSerie`) REFERENCES `equipo` (`numSerie`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_reporte_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario_normal` (`idUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Modela un Reporte generado';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuario_normal`
+-- Dumping data for table `reporte`
 --
 
-LOCK TABLES `usuario_normal` WRITE;
-/*!40000 ALTER TABLE `usuario_normal` DISABLE KEYS */;
-INSERT INTO `usuario_normal` VALUES (1),(2),(3),(4),(5),(6),(7);
-/*!40000 ALTER TABLE `usuario_normal` ENABLE KEYS */;
+LOCK TABLES `reporte` WRITE;
+/*!40000 ALTER TABLE `reporte` DISABLE KEYS */;
+INSERT INTO `reporte` VALUES (1,'2019-12-01','AGOTADO','Ya se acabó...',1,74457),(2,'2019-11-01','INACTIVO','no funciona...',1,76762),(3,'2019-09-01','AGOTADO','e we...',2,77837),(4,'2018-12-28','INACTIVO','por dios nada nunca funciona aquí',3,97238);
+/*!40000 ALTER TABLE `reporte` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02  9:18:13
+-- Dump completed on 2019-12-02  9:18:15
